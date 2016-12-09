@@ -13,7 +13,7 @@ public:
 private:
 	int _fontSize;//字体大小
 	Point _begin;//要添加到的怪物的中心点
-	LabelTTF* m_plabel;//字体类型
+	Label* m_plabel;//字体类型
 };
 
 #endif

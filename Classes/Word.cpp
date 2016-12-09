@@ -1,5 +1,6 @@
 #include"Word.h"
-Word* Word::create(const char *word, const int fontSize, CCPoint begin){
+
+Word* Word::create(const char *word, const int fontSize, Point begin){
 
 Word* ret = new Word();
 
@@ -20,13 +21,13 @@ bool Word::init(const char *word, const int fontSize, Point begin){
 }
 
 //文字从下到上飘动
-void Word::getmove(const char *word, const int fontSize, CCPoint begin)
+void Word::getmove(const char *word, const int fontSize, Point begin)
 {
 	if (!strcmp(word, "more difficult"))
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/arial.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/arial.ttf", fontSize);
 		m_plabel->setColor(Color3B::WHITE);
 
 		this->addChild(m_plabel);
@@ -43,7 +44,7 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/consola.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/consola.ttf", fontSize);
 		m_plabel->setColor(Color3B::YELLOW);
 
 		this->addChild(m_plabel);
@@ -60,7 +61,7 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/consola.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/consola.ttf", fontSize);
 		m_plabel->setColor(Color3B::RED);
 
 		this->addChild(m_plabel);
@@ -76,7 +77,7 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/consola.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/consola.ttf", fontSize);
 		m_plabel->setColor(Color3B::GRAY);
 		this->addChild(m_plabel);
 		this->setPosition(Vec2(begin.x, begin.y));
@@ -91,13 +92,13 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/arial.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/arial.ttf", fontSize);
 		m_plabel->setColor(Color3B::RED);
 
 		this->addChild(m_plabel);
 		this->setPosition(Vec2(begin.x, begin.y));
-		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3);
-		ScaleBy* scaleact_2 = ScaleBy::create(1.0f, 0.8);
+		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3f);
+		ScaleBy* scaleact_2 = ScaleBy::create(1.0f, 0.8f);
 
 		//创建回调动作，文字飘动完后
 		CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Word::moveend));
@@ -109,14 +110,14 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/cooperblack.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/cooperblack.ttf", fontSize);
 		m_plabel->setColor(Color3B::YELLOW);
 		this->addChild(m_plabel);
 		this->setPosition(Vec2(begin.x, begin.y));
-		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3);
-		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0);
-		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3);
-		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0);
+		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3f);
+		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0f);
+		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3f);
+		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0f);
 		auto scaleact_5 = Sequence::create(scaleact, scaleact_2, scaleact_3, scaleact_4,NULL);
 		auto act = CCRepeatForever::create(scaleact_5);
 		this->runAction(act);
@@ -125,14 +126,14 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/cooperblack.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/cooperblack.ttf", fontSize);
 		m_plabel->setColor(Color3B::RED);
 		this->addChild(m_plabel);
 		this->setPosition(Vec2(begin.x, begin.y));
-		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3);
-		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0);
-		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3);
-		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0);
+		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3f);
+		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0f);
+		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3f);
+		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0f);
 		CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Word::moveend));
 		auto act= Sequence::create(scaleact, scaleact_2, scaleact_3, scaleact_4,callFunc,NULL);
 		this->runAction(act);
@@ -141,14 +142,14 @@ void Word::getmove(const char *word, const int fontSize, CCPoint begin)
 	{
 		//初始化
 		_begin = begin;
-		m_plabel = CCLabelTTF::create(word, "fonts/cooperblack.ttf", fontSize);
+		m_plabel = Label::createWithTTF(word, "fonts/cooperblack.ttf", fontSize);
 		m_plabel->setColor(Color3B::YELLOW);
 		this->addChild(m_plabel);
 		this->setPosition(Vec2(begin.x, begin.y));
-		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3);
-		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0);
-		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3);
-		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0);
+		ScaleBy* scaleact = ScaleBy::create(1.0f, 1.3f);
+		ScaleBy* scaleact_2 = ScaleBy::create(2.0f, 1.0f);
+		ScaleBy* scaleact_3 = ScaleBy::create(0,1/1.3f);
+		ScaleBy* scaleact_4 = ScaleBy::create(1.0f, 1.0f);
 		auto scaleact_5 = Sequence::create(scaleact, scaleact_2, scaleact_3, scaleact_4,NULL);
 		auto act = CCRepeatForever::create(scaleact_5);
 		this->runAction(act);

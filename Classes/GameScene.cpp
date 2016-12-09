@@ -321,7 +321,7 @@ void GameScene::updateBossBullet(float dt)
 		{
 			if(time%16==0)
 			{
-				auto act = RotateBy::create(0.4,360);
+				auto act = RotateBy::create(0.4f,360.0f);
 				boss->runAction(act);
 				for(int i=0;i<10;i++)
 				{

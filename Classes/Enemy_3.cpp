@@ -4,11 +4,8 @@ USING_NS_CC;
 
 bool Enemy_3::init()
 {
-	if(!Enemy::init())
-	{
-		return false;
-	}
 	initWithFile("feidan.png");
+	this->setPosition(Vec2(rand() % SCREEN_WIDTH, SCREEN_HEIGHT + 100));
 	auto body = PhysicsBody::createBox(Size(40,115));
 	body->setGravityEnable(false);
 	body->setCategoryBitmask(1);

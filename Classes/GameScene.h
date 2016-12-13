@@ -1,6 +1,7 @@
 #ifndef __GAME_SCENE__
 #define __GAME_SCENE__
 
+#include "EnemyFactory.h"
 #include "cocos2d.h"
 #include "WelcomeScene.h"
 #include "Bullet.h"
@@ -37,6 +38,7 @@ public:
 	static int score;
 	static int gold;
 	static int diamond;
+	static EnemyFactory* fac;
 	//记录成绩
 	int record(int score);
 	//记录金币

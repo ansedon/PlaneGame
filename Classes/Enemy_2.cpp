@@ -4,17 +4,16 @@ USING_NS_CC;
 
 bool Enemy_2::init()
 {
-	if(!Enemy::init())
-	{
-		return false;
-	}
 	initWithFile("enemy2.png");
 	this->setPosition(Vec2(rand() % SCREEN_WIDTH, SCREEN_HEIGHT + 100));
 	auto body = PhysicsBody::createBox((this->getContentSize())*0.9);
 	body->setGravityEnable(false);
+
 	body->setCategoryBitmask(1);
 	body->setCollisionBitmask(1);
 	body->setContactTestBitmask(1);
+	//设置tag
+	setTag(ENEMY_TAG_1);
 	this->setPhysicsBody(body);
 	//设置速度
 	body->setVelocity(Vec2(0,ENEMY_SPEED_2 + (rand()%(ENEMY_SPEED_2/2)) ));

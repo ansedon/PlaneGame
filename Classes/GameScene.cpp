@@ -23,6 +23,7 @@ int GameScene::gold = 0;
 int GameScene::diamond = 0;
 Hero*GameScene::hero = NULL;
 Boss*GameScene::boss = NULL;
+EnemyFactory* GameScene::fac = NULL;
 
 Scene* GameScene::createScene()
 {
@@ -365,7 +366,7 @@ void GameScene::updateEnemy(float dt)
 	if (time != 0 && time % 15 == 0)
 	{
 		//添加敌军战机3代
-		auto enemy_3 = Enemy_3::create();
+		auto enemy_3 = fac->createEnemy(3);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 	}
@@ -373,7 +374,7 @@ void GameScene::updateEnemy(float dt)
 	if (time != 0 && time % 21 == 0&&time<90)
 	{
 		//添加敌军战机5代
-		auto enemy_5 = Enemy_5::create();
+		auto enemy_5 = fac->createEnemy(5);
 		emys.pushBack(enemy_5);
 		addChild(enemy_5);
 	}
@@ -386,13 +387,13 @@ void GameScene::updateEnemy(float dt)
 	else if(time<10)
 	{
 		//添加敌军战机1代
-		auto enemy = Enemy::create();
+		auto enemy = fac->createEnemy(1);
 		emys.pushBack(enemy);
 		addChild(enemy);
-		auto enemy_2 = Enemy::create();
+		auto enemy_2 = fac->createEnemy(1);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
-		auto enemy_3 = Enemy::create();
+		auto enemy_3 = fac->createEnemy(1);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 	}
@@ -410,18 +411,18 @@ void GameScene::updateEnemy(float dt)
 		}
 
 		//添加敌军战机1代
-		auto enemy = Enemy::create();
+		auto enemy = fac->createEnemy(1);
 		emys.pushBack(enemy);
 		addChild(enemy);
-		auto enemy_2 = Enemy::create();
+		auto enemy_2 = fac->createEnemy(1);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
-		auto enemy_3 = Enemy::create();
+		auto enemy_3 = fac->createEnemy(1);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 
 		//添加敌军战机2代
-		auto enemy_2_1 = Enemy_2::create();
+		auto enemy_2_1 = fac->createEnemy(2);
 		emys.pushBack(enemy_2_1);
 		addChild(enemy_2_1);
 	}
@@ -436,26 +437,26 @@ void GameScene::updateEnemy(float dt)
 			enemy_flag++;
 		}
 		//添加敌军战机1代
-		auto enemy = Enemy::create();
+		auto enemy = fac->createEnemy(1);
 		emys.pushBack(enemy);
 		addChild(enemy);
-		auto enemy1 = Enemy::create();
+		auto enemy1 = fac->createEnemy(1);
 		emys.pushBack(enemy1);
 		addChild(enemy1);
-		auto enemy2 = Enemy::create();
+		auto enemy2 = fac->createEnemy(1);
 		emys.pushBack(enemy2);
 		addChild(enemy2);
 
 		//添加敌军战机2代
-		auto enemy_2 = Enemy_2::create();
+		auto enemy_2 = fac->createEnemy(2);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
-		auto enemy_3 = Enemy_2::create();
+		auto enemy_3 = fac->createEnemy(2);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 
 		//添加敌军4代
-		auto enemy_4 = Enemy_4::create();
+		auto enemy_4 = fac->createEnemy(4);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
 	}
@@ -471,26 +472,26 @@ void GameScene::updateEnemy(float dt)
 		}
 
 		//添加敌军战机1代
-		auto enemy = Enemy::create();
+		auto enemy = fac->createEnemy(1);
 		emys.pushBack(enemy);
 		addChild(enemy);
-		auto enemy1 = Enemy::create();
+		auto enemy1 = fac->createEnemy(1);
 		emys.pushBack(enemy1);
 		addChild(enemy1);
 	
 		//添加敌军战机2代
-		auto enemy_2 = Enemy_2::create();
+		auto enemy_2 = fac->createEnemy(2);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
-		auto enemy_2_2 = Enemy_2::create();
+		auto enemy_2_2 = fac->createEnemy(2);
 		emys.pushBack(enemy_2_2);
 		addChild(enemy_2_2);
 
 		//添加敌军4代
-		auto enemy_4 = Enemy_4::create();
+		auto enemy_4 = fac->createEnemy(4);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
-		auto enemy_4_2 = Enemy_4::create();
+		auto enemy_4_2 = fac->createEnemy(4);
 		emys.pushBack(enemy_4_2);
 		addChild(enemy_4_2);
 	}
@@ -506,21 +507,21 @@ void GameScene::updateEnemy(float dt)
 		}
 
 		//添加敌军战机2代
-		auto enemy_2 = Enemy_2::create();
+		auto enemy_2 = fac->createEnemy(2);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
-		auto enemy_2_2 = Enemy_2::create();
+		auto enemy_2_2 = fac->createEnemy(2);
 		emys.pushBack(enemy_2_2);
 		addChild(enemy_2_2);
 
 		//添加敌军4代
-		auto enemy_4 = Enemy_4::create();
+		auto enemy_4 = fac->createEnemy(4);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
-		auto enemy_4_2= Enemy_4::create();
+		auto enemy_4_2= fac->createEnemy(4);
 		emys.pushBack(enemy_4_2);
 		addChild(enemy_4_2);
-		auto enemy_4_3= Enemy_4::create();
+		auto enemy_4_3= fac->createEnemy(4);
 		emys.pushBack(enemy_4_3);
 		addChild(enemy_4_3);
 	}
@@ -1022,7 +1023,7 @@ void GameScene::updateDestroy(float dt)
 			}
 			else if (emys.at(i)->name == ENEMY_NAME_3)
 			{
-				auto particle = ParticleSystemQuad::create("explosion3.plist");
+				auto particle = ParticleSystemQuad::create("explosion.plist");
 				particle->setBlendAdditive(true);
 				particle->setPosition(pos);
 				particle->setDuration(0.5);
@@ -1041,7 +1042,7 @@ void GameScene::updateDestroy(float dt)
 			}
 			else if (emys.at(i)->name == ENEMY_NAME_4)
 			{
-				auto particle = ParticleSystemQuad::create("explosion4.plist");
+				auto particle = ParticleSystemQuad::create("explosion2.plist");
 				particle->setBlendAdditive(true);
 				particle->setPosition(pos);
 				particle->setDuration(0.5);
@@ -1066,7 +1067,7 @@ void GameScene::updateDestroy(float dt)
 			}
 			else if (emys.at(i)->name == ENEMY_NAME_5)
 			{
-				auto particle = ParticleSystemQuad::create("explosion4.plist");
+				auto particle = ParticleSystemQuad::create("explosion2.plist");
 				particle->setBlendAdditive(true);
 				particle->setPosition(pos);
 				particle->setDuration(0.5);

@@ -1,6 +1,8 @@
-#ifndef __ENEMY__
-#define __ENEMY__
+#pragma once
+#ifndef _ENEMY_
+#define _ENEMY_
 #include "cocos2d.h"
+#include "GameDefine.h"
 
 class Enemy : public cocos2d::Sprite
 {
@@ -12,5 +14,4 @@ public:
 	int name;
 	bool hit;
 };
-
 #endif

@@ -2,6 +2,7 @@
 #define __ENEMYALL__
 
 #include "Enemy.h"
+#include "Enemy_1.h"
 #include "Enemy_2.h"
 #include "Enemy_3.h"
 #include "Enemy_4.h"

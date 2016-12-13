@@ -4,12 +4,8 @@ USING_NS_CC;
 
 bool Enemy_5::init()
 {
-	if(!Enemy::init())
-	{
-		return false;
-	}
 	initWithFile("enemy5.png");
-
+	this->setPosition(Vec2(rand() % SCREEN_WIDTH, SCREEN_HEIGHT + 100));
 	//´´½¨¸ÕÌå
 	auto body = PhysicsBody::createBox((this->getContentSize()) * 0.9);
 

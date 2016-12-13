@@ -8,6 +8,9 @@
 
 
 //敌军战机设置
+
+#define ENEMY_NAME 0
+//1
 #define ENEMY_SPEED_1 -200  //敌军速度基类
 #define ENEMY_BLOOD_1 50 //基础血条
 #define ENEMY_NAME_1 1

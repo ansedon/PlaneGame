@@ -41,6 +41,8 @@ public:
 	static int diamond;
 	static EnemyFactory* fac;
 	StateControl* S;
+	int	enemyMum;     //杀敌数量
+	int level;        //等级
 	//记录成绩
 	int record(int score);
 	//记录金币
@@ -79,8 +81,6 @@ public:
 	void updateDestroy(float dt);
 	void updateTime(float dt);
 	void updateBonus(float dt);
-	//声音按钮回调
-	void menuVoiceCallback( Ref* pSender );
 	void win();
 
 	//炸弹
@@ -88,6 +88,12 @@ public:
 
 	//移除所有敌机
 	void removeAllEnemy();
+
+	//通知所有观察者
+	void notifyObserver();
+
+	//改变飞机状态
+	void Change();
 };
 
 #endif

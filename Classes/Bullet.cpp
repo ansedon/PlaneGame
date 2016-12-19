@@ -31,3 +31,8 @@ void Bullet::next(StateControl*s)
 {
 	CCLOG("next");
 }
+
+void Bullet::update(int num)
+{
+	CCLOG("update");
+}

@@ -104,6 +104,12 @@ bool GameScene::init()
 	hero = Hero::create();
 	addChild(hero,1);
 
+	//初始化杀敌数量
+	enemyMum = 0;
+
+	//初始化等级
+	level = 0;
+
 	//初始化StateControl
 	auto hbullet = HeroBullet::create();
 	S = new StateControl(hbullet, 1);
@@ -208,6 +214,7 @@ void GameScene::updateHeroBullet(float dt)
 		case 1:
 			{
 				auto bul1_1 = HeroBullet::create();
+				bul1_1->update(enemyMum);
 				S->setType(bul1_1, 1);
 				bul1_1->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y + 30));
 				buls.pushBack(bul1_1);
@@ -218,6 +225,7 @@ void GameScene::updateHeroBullet(float dt)
 			{
 			//子弹2
 				auto bul1_1 = HeroBullet_2::create();
+				bul1_1->update(enemyMum);
 				S->setType(bul1_1, 2);
 				bul1_1->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y));
 				buls.pushBack(bul1_1);
@@ -228,6 +236,7 @@ void GameScene::updateHeroBullet(float dt)
 			{
 				//子弹3
 				auto bul1_2 = HeroBullet_3::create();
+				bul1_2->update(enemyMum);
 				S->setType(bul1_2, 3);
 				bul1_2->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y));
 				buls.pushBack(bul1_2);
@@ -252,6 +261,7 @@ void GameScene::updateEnemyBullet(float dt)
 				if( rand()%10 < 4 )
 				{
 					auto emyBul = EnemyBullet::create();
+					emyBul->update(enemyMum);
 					emyBul->setPosition(Vec2(enemy->getPosition().x, enemy->getPosition().y -55) );
 					buls.pushBack(emyBul);
 					addChild(emyBul);
@@ -263,6 +273,7 @@ void GameScene::updateEnemyBullet(float dt)
 				if( rand()%10 < 5 )
 				{
 					auto emyBul = EnemyBullet_2::create();
+					emyBul->update(enemyMum);
 					emyBul->setPosition(Vec2(enemy->getPosition().x, enemy->getPosition().y) );
 					buls.pushBack(emyBul);
 					addChild(emyBul);
@@ -273,6 +284,7 @@ void GameScene::updateEnemyBullet(float dt)
 				if (rand() % 10 < 6)
 				{
 					auto emyBul = EnemyBullet_2::create();
+					emyBul->update(enemyMum);
 					emyBul->setPosition(Vec2(enemy->getPosition().x, enemy->getPosition().y));
 					buls.pushBack(emyBul);
 					addChild(emyBul);
@@ -283,14 +295,17 @@ void GameScene::updateEnemyBullet(float dt)
 				if (rand() % 10 < 8)
 				{
 					auto emyBul = EnemyBullet_2::create();
+					emyBul->update(enemyMum);
 					emyBul->setPosition(Vec2(enemy->getPosition().x, enemy->getPosition().y));
 					buls.pushBack(emyBul);
 					addChild(emyBul);
 					auto emyBul_2 = EnemyBullet::create();
+					emyBul_2->update(enemyMum);
 					emyBul_2->setPosition(Vec2(enemy->getPosition().x-160, enemy->getPosition().y));
 					buls.pushBack(emyBul_2);
 					addChild(emyBul_2);
 					auto emyBul_3= EnemyBullet::create();
+					emyBul_3->update(enemyMum);
 					emyBul_3->setPosition(Vec2(enemy->getPosition().x+160, enemy->getPosition().y));
 					buls.pushBack(emyBul_3);
 					addChild(emyBul_3);
@@ -302,10 +317,12 @@ void GameScene::updateEnemyBullet(float dt)
 				if (time>102&&rand() % 10 < 5&&time%16!=0)
 				{
 					auto emyBul = EnemyBullet_2::create();
+					emyBul->update(enemyMum);
 					emyBul->setPosition(Vec2(enemy->getPosition().x-55, enemy->getPosition().y-150));
 					buls.pushBack(emyBul);
 					addChild(emyBul);
 					auto emyBul_2 = EnemyBullet_2::create();
+					emyBul_2->update(enemyMum);
 					emyBul_2->setPosition(Vec2(enemy->getPosition().x+55, enemy->getPosition().y-150));
 					buls.pushBack(emyBul_2);
 					addChild(emyBul_2);
@@ -313,10 +330,12 @@ void GameScene::updateEnemyBullet(float dt)
 				if(time>102&&rand() % 10 < 7&&time%16!=0)
 				{
 					auto emyBul_3 = EnemyBullet::create();
+					emyBul_3->update(enemyMum);
 					emyBul_3->setPosition(Vec2(enemy->getPosition().x-166, enemy->getPosition().y-15));
 					buls.pushBack(emyBul_3);
 					addChild(emyBul_3);
 					auto emyBul_4= EnemyBullet::create();
+					emyBul_4->update(enemyMum);
 					emyBul_4->setPosition(Vec2(enemy->getPosition().x+166, enemy->getPosition().y-15));
 					buls.pushBack(emyBul_4);
 					addChild(emyBul_4);
@@ -379,6 +398,7 @@ void GameScene::updateEnemy(float dt)
 	{
 		//添加敌军战机3代
 		auto enemy_3 = fac->createEnemy(3);
+		enemy_3->update(enemyMum);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 	}
@@ -387,6 +407,7 @@ void GameScene::updateEnemy(float dt)
 	{
 		//添加敌军战机5代
 		auto enemy_5 = fac->createEnemy(5);
+		enemy_5->update(enemyMum);
 		emys.pushBack(enemy_5);
 		addChild(enemy_5);
 	}
@@ -400,12 +421,15 @@ void GameScene::updateEnemy(float dt)
 	{
 		//添加敌军战机1代
 		auto enemy = fac->createEnemy(1);
+		enemy->update(enemyMum);
 		emys.pushBack(enemy);
 		addChild(enemy);
 		auto enemy_2 = fac->createEnemy(1);
+		enemy_2->update(enemyMum);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
 		auto enemy_3 = fac->createEnemy(1);
+		enemy_3->update(enemyMum);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 	}
@@ -424,17 +448,21 @@ void GameScene::updateEnemy(float dt)
 
 		//添加敌军战机1代
 		auto enemy = fac->createEnemy(1);
+		enemy->update(enemyMum);
 		emys.pushBack(enemy);
 		addChild(enemy);
 		auto enemy_2 = fac->createEnemy(1);
+		enemy_2->update(enemyMum);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
 		auto enemy_3 = fac->createEnemy(1);
+		enemy_3->update(enemyMum);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 
 		//添加敌军战机2代
 		auto enemy_2_1 = fac->createEnemy(2);
+		enemy_2_1->update(enemyMum);
 		emys.pushBack(enemy_2_1);
 		addChild(enemy_2_1);
 	}
@@ -450,25 +478,31 @@ void GameScene::updateEnemy(float dt)
 		}
 		//添加敌军战机1代
 		auto enemy = fac->createEnemy(1);
+		enemy->update(enemyMum);
 		emys.pushBack(enemy);
 		addChild(enemy);
 		auto enemy1 = fac->createEnemy(1);
+		enemy1->update(enemyMum);
 		emys.pushBack(enemy1);
 		addChild(enemy1);
 		auto enemy2 = fac->createEnemy(1);
+		enemy2->update(enemyMum);
 		emys.pushBack(enemy2);
 		addChild(enemy2);
 
 		//添加敌军战机2代
 		auto enemy_2 = fac->createEnemy(2);
+		enemy_2->update(enemyMum);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
 		auto enemy_3 = fac->createEnemy(2);
+		enemy_3->update(enemyMum);
 		emys.pushBack(enemy_3);
 		addChild(enemy_3);
 
 		//添加敌军4代
 		auto enemy_4 = fac->createEnemy(4);
+		enemy_4->update(enemyMum);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
 	}
@@ -485,25 +519,31 @@ void GameScene::updateEnemy(float dt)
 
 		//添加敌军战机1代
 		auto enemy = fac->createEnemy(1);
+		enemy->update(enemyMum);
 		emys.pushBack(enemy);
 		addChild(enemy);
 		auto enemy1 = fac->createEnemy(1);
+		enemy1->update(enemyMum);
 		emys.pushBack(enemy1);
 		addChild(enemy1);
 	
 		//添加敌军战机2代
 		auto enemy_2 = fac->createEnemy(2);
+		enemy_2->update(enemyMum);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
 		auto enemy_2_2 = fac->createEnemy(2);
+		enemy_2_2->update(enemyMum);
 		emys.pushBack(enemy_2_2);
 		addChild(enemy_2_2);
 
 		//添加敌军4代
 		auto enemy_4 = fac->createEnemy(4);
+		enemy_4->update(enemyMum);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
 		auto enemy_4_2 = fac->createEnemy(4);
+		enemy_4_2->update(enemyMum);
 		emys.pushBack(enemy_4_2);
 		addChild(enemy_4_2);
 	}
@@ -520,20 +560,25 @@ void GameScene::updateEnemy(float dt)
 
 		//添加敌军战机2代
 		auto enemy_2 = fac->createEnemy(2);
+		enemy_2->update(enemyMum);
 		emys.pushBack(enemy_2);
 		addChild(enemy_2);
 		auto enemy_2_2 = fac->createEnemy(2);
+		enemy_2_2->update(enemyMum);
 		emys.pushBack(enemy_2_2);
 		addChild(enemy_2_2);
 
 		//添加敌军4代
 		auto enemy_4 = fac->createEnemy(4);
+		enemy_4->update(enemyMum);
 		emys.pushBack(enemy_4);
 		addChild(enemy_4);
 		auto enemy_4_2= fac->createEnemy(4);
+		enemy_4_2->update(enemyMum);
 		emys.pushBack(enemy_4_2);
 		addChild(enemy_4_2);
 		auto enemy_4_3= fac->createEnemy(4);
+		enemy_4_3->update(enemyMum);
 		emys.pushBack(enemy_4_3);
 		addChild(enemy_4_3);
 	}
@@ -687,7 +732,7 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		hero->hit = true;
 		auto enemy = dynamic_cast<Enemy*> (node1);
 		hero->blood -= enemy->blood;
-		hpBar->setPercentage(hero->blood *100/HERO_BLOOD);//血条变化
+		hpBar->setPercentage((hero->blood *100+enemyMum/3*10)/(HERO_BLOOD+ enemyMum / 3 * 10));//血条变化
 		if(enemy->name!=BOSS_NAME)
 		{
 			enemy->blood = 0;
@@ -701,7 +746,7 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		hero->hit = true;
 		auto enemy = dynamic_cast<Enemy*> (node2);
 		hero->blood -= enemy->blood;
-		hpBar->setPercentage(hero->blood* 100/HERO_BLOOD);//血条变化
+		hpBar->setPercentage((hero->blood * 100 + enemyMum / 3 * 10) / (HERO_BLOOD + enemyMum / 3 * 10));//血条变化
 		if(enemy->name!=BOSS_NAME)
 		{
 			enemy->blood = 0;
@@ -717,7 +762,7 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		auto temp_bul = dynamic_cast<Bullet*> (node1);
 		temp_bul->destroy = true;
 		hero->blood-=temp_bul->power;
-		hpBar->setPercentage(hero->blood* 100/HERO_BLOOD);//血条变化
+		hpBar->setPercentage((hero->blood * 100 + enemyMum / 3 * 10) / (HERO_BLOOD + enemyMum / 3 * 10));//血条变化
 		return false;
 	}
 
@@ -728,7 +773,7 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		auto temp_bul = dynamic_cast<Bullet*> (node2);
 		temp_bul->destroy = true;
 		hero->blood-=temp_bul->power;
-		hpBar->setPercentage(hero->blood *100/HERO_BLOOD);//血条变化
+		hpBar->setPercentage((hero->blood * 100 + enemyMum / 3 * 10) / (HERO_BLOOD + enemyMum / 3 * 10));//血条变化
 		return true;
 	}
 	return false;
@@ -984,6 +1029,13 @@ void GameScene::updateDestroy(float dt)
 			}
 		else if( emys.at(i)->destroy || emys.at(i)->blood<=0 )
 			{
+				enemyMum++;
+				if (enemyMum / 30 > level)
+				{
+					Change();
+					notifyObserver();
+					level++;
+				}
 				//根据敌机名字增加粒子效果
 				if (emys.at(i)->name == ENEMY_NAME_1)
 					{
@@ -1213,5 +1265,23 @@ void GameScene::win()
 	Director::getInstance()->replaceScene(animate);
 }
 
+void GameScene::notifyObserver()
+{
+	for (int i = 0; i < buls.size(); i++)
+	{
+		buls.at(i)->update(enemyMum);
+	}
+	for (int i = 0; i < emys.size(); i++)
+	{
+		emys.at(i)->update(enemyMum);
+	}
+
+
+}
+
+void GameScene:: Change() 
+{
+	hero->update(enemyMum);
+}
 
 

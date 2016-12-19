@@ -9,3 +9,7 @@ bool Enemy::init()
 	hit = false;
 	return true;
 }
+
+void Enemy::update(int num)
+{
+}

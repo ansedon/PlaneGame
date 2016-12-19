@@ -17,3 +17,8 @@ bool EnemyBullet_2::init()
 	body->setVelocity(Vec2(0,-(BULLET_SPEED_2*3/2 )));
 	return true;
 }
+
+void EnemyBullet_2::update(int num)
+{
+	this->power += (num / 30 * 80);
+}

@@ -23,3 +23,8 @@ bool Enemy_3::init()
 	return true;
 }
 
+void Enemy_3::update(int num)
+{
+	this->blood += num * 5;
+}
+

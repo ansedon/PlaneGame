@@ -170,3 +170,9 @@ void Hero::updatePosition(float dt)
 	}
 }
 
+void Hero::update(int num)
+{
+	this->blood += num*10/3;
+}
+
+

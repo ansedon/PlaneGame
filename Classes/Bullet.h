@@ -16,5 +16,6 @@ public:
 	bool destroy;
 	virtual void last(StateControl*s);
 	virtual void next(StateControl*s);
+	virtual void update(int num);
 };
 #endif

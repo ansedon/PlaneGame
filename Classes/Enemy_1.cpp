@@ -27,3 +27,9 @@ USING_NS_CC;
 	return true;
 }
 
+void Enemy_1:: update(int num)
+{
+	this->blood += num * 5;
+}
+
+

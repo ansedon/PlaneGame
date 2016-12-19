@@ -12,6 +12,7 @@ public:
 	CREATE_FUNC(HeroBullet);
 	void last(StateControl*s);
 	void next(StateControl*s);
+	void update(int num);
 };
 
 #endif

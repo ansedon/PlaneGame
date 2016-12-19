@@ -9,6 +9,7 @@ public:
 	public:
 	virtual bool init();
 	CREATE_FUNC(EnemyBullet_2);
+	void update(int num);
 };
 
 #endif

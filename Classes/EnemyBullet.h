@@ -8,6 +8,7 @@ class EnemyBullet : public Bullet
 public:
 	virtual bool init();
 	CREATE_FUNC(EnemyBullet);
+	void update(int num);
 };
 
 #endif

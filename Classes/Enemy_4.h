@@ -6,7 +6,8 @@ class Enemy_4 : public Enemy
 public:
 	virtual bool init();
 	CREATE_FUNC(Enemy_4);
-	void update(float dt);
+	void updateFly(float dt);
+	void update(int num);
 };
 
 #endif

@@ -25,7 +25,6 @@ public:
 	void updatePosition(float dt);
 	bool hit;
 	bool p_w, p_a, p_s, p_d;
+	void update(int num);
 };
-
-
 #endif

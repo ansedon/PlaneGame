@@ -27,11 +27,11 @@ bool Enemy_5::init()
 	this->destroy = false;
 
 	//改变飞行轨迹
-	schedule(schedule_selector(Enemy_5::update), 1.0f, kRepeatForever, 1);
+	schedule(schedule_selector(Enemy_5::updateFly), 1.0f, kRepeatForever, 1);
 	return true;
 }
 
-void Enemy_5::update(float dt)
+void Enemy_5::updateFly(float dt)
 {
 	auto body = this->getPhysicsBody();
 	//50%速度浮动
@@ -39,3 +39,7 @@ void Enemy_5::update(float dt)
 		(ENEMY_SPEED_5+ rand()%(ENEMY_SPEED_5*3/2) )  ));
 }
 
+void Enemy_5::update(int num)
+{
+	this->blood += num * 5;
+}

@@ -13,5 +13,6 @@ public:
 	bool destroy;
 	int name;
 	bool hit;
+	virtual void update(int num);
 };
 #endif

@@ -37,7 +37,7 @@
 #define ENEMY_NAME_5 5
 
 //boss
-#define BOSS_BLOOD 10000
+#define BOSS_BLOOD 50000
 #define BOSS_NAME 6
 
 //∆¡ƒª…Ë÷√

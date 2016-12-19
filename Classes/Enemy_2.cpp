@@ -26,14 +26,19 @@ bool Enemy_2::init()
 
 	this->destroy = false;
 	//改变飞行轨迹
-	schedule(schedule_selector(Enemy_2::update), 0.5f, kRepeatForever, 1);
+	schedule(schedule_selector(Enemy_2::updateFly), 0.5f, kRepeatForever, 1);
 	return true;
 }
 
-void Enemy_2::update(float dt)
+void Enemy_2::updateFly(float dt)
 {
 	auto body = this->getPhysicsBody();
 	//改变运动方向
 	body->setVelocity( Vec2( ( ENEMY_SPEED_2/2 + rand()%ENEMY_SPEED_2 ),
 		(ENEMY_SPEED_2+ rand()%(ENEMY_SPEED_2*3/2) )  ));
+}
+
+void Enemy_2::update(int num)
+{
+	this->blood += num * 5;
 }

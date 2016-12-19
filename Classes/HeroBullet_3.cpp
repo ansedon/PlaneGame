@@ -30,3 +30,8 @@ void HeroBullet_3::last(StateControl*s)
 	Bullet*b = HeroBullet_2::create();
 	s->setType(b, 2);
 }
+
+void HeroBullet_3::update(int num)
+{
+	this->power += num / 30 * 50;
+}

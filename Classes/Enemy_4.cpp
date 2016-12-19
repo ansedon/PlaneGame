@@ -23,15 +23,20 @@ bool Enemy_4::init()
 	this->destroy = false;
 
 	//改变飞行轨迹
-	schedule(schedule_selector(Enemy_4::update), 2.0f, kRepeatForever, 1);
+	schedule(schedule_selector(Enemy_4::updateFly), 2.0f, kRepeatForever, 1);
 	return true;
 }
 
-void Enemy_4::update(float dt)
+void Enemy_4::updateFly(float dt)
 {
 	auto body = this->getPhysicsBody();
 	//改变飞行轨迹
 	body->setVelocity( Vec2( ( ENEMY_SPEED_4/2 + rand()%ENEMY_SPEED_4 ),
 		(ENEMY_SPEED_4+ rand()%(ENEMY_SPEED_4*3/2) )  ));
+}
+
+void Enemy_4::update(int num)
+{
+	this->blood += num * 5;
 }
 

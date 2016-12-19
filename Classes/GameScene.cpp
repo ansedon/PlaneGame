@@ -51,7 +51,7 @@ bool GameScene::init()
 	this->bonus_time = 6;
 
 	//初始化bonus_flag
-	bonus_flag = 1;
+	//bonus_flag = 1;
 
 	//初始化enemy_flag
 	enemy_flag = 1;
@@ -59,7 +59,7 @@ bool GameScene::init()
 	//添加战斗背景
 	auto bg = GameBackground::create();
 	addChild(bg);
-
+	
 	hpBgSprite = Sprite::create("hp_2.png");
 	hpBgSprite->setPosition(Point(320, 910));
 	this->addChild(hpBgSprite);
@@ -103,6 +103,13 @@ bool GameScene::init()
 	//添加hero
 	hero = Hero::create();
 	addChild(hero,1);
+
+	//初始化StateControl
+	auto hbullet = HeroBullet::create();
+	S = new StateControl(hbullet, 1);
+	hbullet->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y + 30));
+	buls.pushBack(hbullet);
+	addChild(hbullet);
 
 	//sound
 	if (WelcomeScene::voice)
@@ -172,11 +179,12 @@ void GameScene::updateHeroBullet(float dt)
 	if(hero->blood>0)
 	{
 		//控制bonus作用的时间
-		if (bonus_flag == 3)
+		if (S->getBulletType() == 3)
 		{
-			if (bonus_time == 8 && bonus_flag > 1)
+			if (bonus_time == 8 &&S->getBulletType() > 1)
 			{
-				bonus_flag--;
+				//bonus_flag--;
+				S->push();
 				bonus_time = 0;
 				char szName[100] = { 0 };
 				sprintf(szName, "bullet downgrades");
@@ -184,22 +192,23 @@ void GameScene::updateHeroBullet(float dt)
 				this->addChild(word, 2);
 			}
 		}
-		if (bonus_time == 8 && bonus_flag > 1)
+		if (bonus_time == 8 && S->getBulletType() > 1)
 		{
-			bonus_flag--;
+		//	bonus_flag--;
+			S->push();
 			char szName[100] = { 0 };
 			sprintf(szName, "bullet downgrades");
 			Word *word = Word::create(szName, 64, CCPointMake(320, 650));
 			this->addChild(word, 2);
 		}
-
 		//添加英雄子弹
-		switch (bonus_flag)
+		switch (S->getBulletType())
 		{
 			//子弹1
 		case 1:
 			{
 				auto bul1_1 = HeroBullet::create();
+				S->setType(bul1_1, 1);
 				bul1_1->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y + 30));
 				buls.pushBack(bul1_1);
 				addChild(bul1_1);
@@ -209,6 +218,7 @@ void GameScene::updateHeroBullet(float dt)
 			{
 			//子弹2
 				auto bul1_1 = HeroBullet_2::create();
+				S->setType(bul1_1, 2);
 				bul1_1->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y));
 				buls.pushBack(bul1_1);
 				addChild(bul1_1);
@@ -218,6 +228,7 @@ void GameScene::updateHeroBullet(float dt)
 			{
 				//子弹3
 				auto bul1_2 = HeroBullet_3::create();
+				S->setType(bul1_2, 3);
 				bul1_2->setPosition(Vec2(hero->getPosition().x, hero->getPosition().y));
 				buls.pushBack(bul1_2);
 				addChild(bul1_2);
@@ -228,6 +239,7 @@ void GameScene::updateHeroBullet(float dt)
 	return ;
 }
 
+//为敌军添加子弹
 void GameScene::updateEnemyBullet(float dt)
 {
 	//添加敌军子弹
@@ -593,15 +605,16 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		temp_bons->destroy = true;
 		temp_bons->removeFromParent();
 		//bons.eraseObject(temp_bons);
-		if (bonus_flag <= 2)
-		{
-			bonus_flag++;
+		//if (S->getBulletType() <= 2)
+		//{
+			//bonus_flag++;
+			S->pull();
 			this->bonus_time = 0;
 			char szName[100] = { 0 };
 			sprintf(szName, "bullet upgrades");
 			Word *word = Word::create(szName, 64, CCPointMake(320,400));
 			this->addChild(word, 2);
-		}
+		//}
 		return false;
 	}
 	//若飞机吃到bonus
@@ -613,15 +626,16 @@ bool GameScene::contactBegin(PhysicsContact& contact)
 		temp_bons->destroy = true;
 		temp_bons->removeFromParent();
 	//	bons.eraseObject(temp_bons);
-		if (bonus_flag <= 2)
-		{
-			bonus_flag++;
+		//if (S->getBulletType() <= 2)
+	//	{
+			//bonus_flag++;
+			S->pull();
 			this->bonus_time = 0;
 			char szName[100] = { 0 };
 			sprintf(szName,"bullet upgrades");
 			Word *word = Word::create(szName,64, CCPointMake(320, 400));
 			this->addChild(word, 2);
-		}
+		//}
 		return false;
 	}
 

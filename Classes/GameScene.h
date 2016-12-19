@@ -11,6 +11,7 @@
 #include "Gold.h"
 #include "Boss.h"
 #include "BossBullet.h"
+#include "StateControl.h"
 USING_NS_CC;
 
 class GameScene : public Layer
@@ -23,7 +24,7 @@ private:
 	Vector<Bullet*> buls;
 	Vector<Enemy*> emys;
 	Vector<bonus*> bons;
-	int bonus_flag; 
+	//int bonus_flag; 
 	int bonus_time;
 	Label * score_label;
 	Label * diamond_label;
@@ -39,6 +40,7 @@ public:
 	static int gold;
 	static int diamond;
 	static EnemyFactory* fac;
+	StateControl* S;
 	//记录成绩
 	int record(int score);
 	//记录金币

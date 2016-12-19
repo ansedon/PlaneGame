@@ -1,6 +1,7 @@
 #include "HeroBullet.h"
 #include "GameDefine.h"
 
+
 bool HeroBullet::init()
 {
 	initWithFile("bullet/herobullet.png");
@@ -17,4 +18,15 @@ bool HeroBullet::init()
 	auto body = this->getPhysicsBody();
 	body->setVelocity(Vec2(0, HERO_BULLET_SPEED));
 	return true;
+}
+
+void HeroBullet::next(StateControl*s)
+{
+	Bullet*b = HeroBullet_2::create();
+	s->setType(b, 2);
+}
+
+void HeroBullet::last(StateControl*s)
+{
+
 }

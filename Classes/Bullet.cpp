@@ -21,3 +21,13 @@ int Bullet::getPower()
 {
 	return this->power;
 }
+
+void Bullet::last(StateControl*s)
+{
+	CCLOG("last");
+}
+
+void Bullet::next(StateControl*s)
+{
+	CCLOG("next");
+}

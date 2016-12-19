@@ -18,3 +18,15 @@ bool HeroBullet_2::init()
 	body->setVelocity(Vec2(0, HERO_BULLET_SPEED));
 	return true;
 }
+
+void HeroBullet_2::next(StateControl*s)
+{
+	Bullet*b = HeroBullet_3::create();
+	s->setType(b,3);
+}
+
+void HeroBullet_2::last(StateControl*s)
+{
+	Bullet*b = HeroBullet::create();
+	s->setType(b, 1);
+}

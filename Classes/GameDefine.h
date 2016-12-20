@@ -3,7 +3,7 @@
 
 //英雄设置
 #define HERO_BULLET_RATE_1 0.2f //hero子弹频率
-#define HERO_BLOOD 1000//hero基础血量
+#define HERO_BLOOD 5000//hero基础血量
 #define MOVE_VALUE 20//hero键盘控制移动速度
 
 

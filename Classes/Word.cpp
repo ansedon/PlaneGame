@@ -40,23 +40,6 @@ void Word::getmove(const char *word, const int fontSize, Point begin)
 		ActionInterval* act = Sequence::create(moveact, callFunc, NULL);
 		this->runAction(act);
 	}
-	else if (!strcmp(word, "bullet upgrades"))
-	{
-		//初始化
-		_begin = begin;
-		m_plabel = Label::createWithTTF(word, "fonts/consola.ttf", fontSize);
-		m_plabel->setColor(Color3B::YELLOW);
-
-		this->addChild(m_plabel);
-		this->setPosition(Vec2(begin.x, begin.y));
-		MoveBy* moveact = MoveBy::create(1.0f, CCPointMake(0, 300));//1.0秒向上移动300
-
-		//创建回调动作，文字飘动完后
-		CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Word::moveend));
-		//创建连续动作
-		ActionInterval* act = Sequence::create(moveact, callFunc, NULL);
-		this->runAction(act);
-	}
 	else if (!strcmp(word, "record breaking"))
 	{
 		//初始化
@@ -71,21 +54,6 @@ void Word::getmove(const char *word, const int fontSize, Point begin)
 		CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Word::moveend));
 		//创建连续动作
 		ActionInterval* act = Sequence::create(scaleact, callFunc, NULL);
-		this->runAction(act);
-	}
-	else if (!strcmp(word, "bullet downgrades"))
-	{
-		//初始化
-		_begin = begin;
-		m_plabel = Label::createWithTTF(word, "fonts/consola.ttf", fontSize);
-		m_plabel->setColor(Color3B::GRAY);
-		this->addChild(m_plabel);
-		this->setPosition(Vec2(begin.x, begin.y));
-		MoveBy* moveact = MoveBy::create(1.0f, CCPointMake(0, -300));//1.0秒向下移动300
-		//创建回调动作，文字飘动完后
-		CallFunc* callFunc = CallFunc::create(this, callfunc_selector(Word::moveend));
-		//创建连续动作
-		ActionInterval* act = Sequence::create(moveact, callFunc, NULL);
 		this->runAction(act);
 	}
 	else if (!strcmp(word, "missile coming")||!strcmp(word, "right click")||!strcmp(word, "release bomb"))

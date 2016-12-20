@@ -12,8 +12,14 @@
 #include "Boss.h"
 #include "BossBullet.h"
 #include "StateControl.h"
-USING_NS_CC;
+#include "Strategy.h"
+#include "StrategyA.h"
+#include "StrategyB.h"
+#include "StrategyC.h"
+#include "StrategyD.h"
 
+USING_NS_CC;
+class Strategy;
 class GameScene : public Layer
 {
 private:
@@ -21,9 +27,6 @@ private:
 	Sprite* hpBgSprite;
 	Vec2 heropos;
 	Size screenSize;
-	Vector<Bullet*> buls;
-	Vector<Enemy*> emys;
-	Vector<bonus*> bons;
 	//int bonus_flag; 
 	int bonus_time;
 	Label * score_label;
@@ -33,7 +36,10 @@ private:
 	int time;
 	int enemy_flag;
 	int bomb_num;
-public:
+public: 
+	Vector<Bullet*> buls;
+	Vector<Enemy*> emys;
+	Vector<bonus*> bons;
 	static Hero* hero;
 	static Boss*boss;
 	static int score;
@@ -41,6 +47,7 @@ public:
 	static int diamond;
 	static EnemyFactory* fac;
 	StateControl* S;
+	Strategy* stg;
 	int	enemyMum;     //杀敌数量
 	int level;        //等级
 	//记录成绩
